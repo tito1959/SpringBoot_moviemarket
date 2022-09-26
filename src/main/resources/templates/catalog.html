@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/catalog.css">
+    <title>My shop Catalog</title>
+</head>
+
+<body class="d-flex h-100 text-center text-bg-dark">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">My Video Market</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">Home</a>
+                    <a class="nav-link fw-bold py-1 px-0 active" href="/catalog">Catalog</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/contact">Contact</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/login">Login</a>
+                </nav>
+            </div>
+        </header>
+        <main class="py-5">
+            <div class="container-fluid">
+                <!-- Carousel -->
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <svg class="bd-placeholder-img" width="100%" height="100%"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <rect width="100%" height="100%" fill="#777" />
+                            </svg>
+
+                            <div class="container">
+                                <div class="carousel-caption text-start">
+                                    <h1>Example headline.</h1>
+                                    <p>Some representative placeholder content for the first slide of the carousel.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <svg class="bd-placeholder-img" width="100%" height="100%"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <rect width="100%" height="100%" fill="#777" />
+                            </svg>
+
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h1>Another example headline.</h1>
+                                    <p>Some representative placeholder content for the second slide of the carousel.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <svg class="bd-placeholder-img" width="100%" height="100%"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <rect width="100%" height="100%" fill="#777" />
+                            </svg>
+
+                            <div class="container">
+                                <div class="carousel-caption text-end">
+                                    <h1>One more for good measure.</h1>
+                                    <p>Some representative placeholder content for the third slide of this carousel.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- Galery -->
+                <div class="row">
+                    <div class="col-sm-12 col-md-3 col-lg-2">
+                        <div class="d-flex flex-column flex-shrink-0 text-bg-gray m-auto text-center">
+                            <a href="#" class="mb-md-0 me-md-auto text-white text-decoration-none">
+                                <span class="fs-4">Categories</span>
+                            </a>
+                            <hr>
+                            <ul class="nav nav-pills flex-column mb-auto gap-2">
+                                <li th:each="cat: ${categories}" class="nav-item">
+                                    <a th:href="@{/catalog/{id}(id=${cat.id})}"
+                                        th:class="'nav-link ' + ${cat.id == id ? 'active' : ''}" aria-current="page">
+                                        <span th:text="${cat.name}">Home</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Catalog List -->
+                    <div th:if="${error != null}" class="col-sm-12 col-md-9">
+                        <div th:text="${error}" class="alert alert-warning text-dark" role="alert" id="error">
+                            Error
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-10 pt-5" th:if="${error == null}">
+                        <div th:if="${id == null}">
+                            <p class="h2">Select one category</p>
+                        </div>
+                        <div class="row d-flex justify-content-center" th:if="${id != null}">
+                            <div class="col" th:if="${movies.isEmpty()}">
+                                <p>No videos avaliable in this category :(</p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 p-2" th:if="${!movies.isEmpty()}"
+                                th:each="movie : ${movies}">
+                                <div class="card-group">
+                                    <div class="card">
+                                        <!-- img thumbnail card -->
+                                        <div th:if='${movie.getImageUrl().equalsIgnoreCase("null")}'>
+                                            <img src="/img/thumbnail.jpg" alt="" class="card-img-top">
+                                        </div>
+
+                                        <div th:if='${!movie.getImageUrl().equalsIgnoreCase("null")}'>
+                                            <img th:src="|/img/${movie.getImageUrl}.jpg|" alt="" class="card-img-top">
+                                        </div>
+                                        <!-- end img thumbnail -->
+                                        <div class="card-body text-dark">
+                                            <h5 th:text="${movie.name}" class="card-title">Card Title</h5>
+                                            <p th:text="${movie.description}" class="card-text">
+                                                This is a wider card with supporting text below as
+                                                lead-in to additional content. This content is a little bit
+                                                longer.
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary">View</button>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </div>
+                                                <small class="text-muted">
+                                                    <span th:text="|${movie.duration} mins.|">9 mins</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+    </div>
+
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
