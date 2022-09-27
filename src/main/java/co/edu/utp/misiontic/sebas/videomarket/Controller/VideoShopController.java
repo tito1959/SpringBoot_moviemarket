@@ -6,19 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import co.edu.utp.misiontic.sebas.videomarket.Service.CatalogService;
+import lombok.AllArgsConstructor;
 
 /*
  * Controlador dedicado a la navegación de toda la web
  */
+@AllArgsConstructor
 @Controller
 public class VideoShopController {
 
     private CatalogService catalogService;
-
-    // Inizializando los atributos
-    public VideoShopController(CatalogService catalogService) {
-        this.catalogService = catalogService;
-    }
 
     @GetMapping("/catalog")
     public String goToCatalog(Model model) {
@@ -26,6 +23,7 @@ public class VideoShopController {
 
         model.addAttribute("name", "Bienvenidos a mi pagina");
         model.addAttribute("categories", categories);
+        System.out.println(categories);
         return "catalog";
     }
 
@@ -44,7 +42,7 @@ public class VideoShopController {
             var category = categoryOp.get();
             var categoryMovies = this.catalogService.getMoviesByCategoryId(id);
 
-            model.addAttribute("title", category.getName());
+            model.addAttribute("name", category.getName());
             model.addAttribute("id", category.getId());
             model.addAttribute("movies", categoryMovies);
         }
