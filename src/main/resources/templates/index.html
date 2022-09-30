@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="h-100" lang="es" xmlns:th="http://thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="/img/icons/logo.ico">
+    <title>My Video Shop</title>
+</head>
+
+<body class="d-flex h-100 text-center text-bg-dark">
+
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <div th:replace="layout/header :: header">...</div>
+
+        <main class="px-3">
+            <h1>My Video Shop</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
+                the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+                <a href="/login" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Sign In</a>
+            </p>
+        </main>
+
+        <!-- Footer -->
+        <div th:replace="layout/footer :: footer">...</div>
+
+    </div>
+
+    <script src="/js/isLoged.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

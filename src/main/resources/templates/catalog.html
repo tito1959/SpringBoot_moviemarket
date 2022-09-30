@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org/">
+<html lang="es" xmlns:th="http://thymeleaf.org/" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -8,92 +8,16 @@
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/catalog.css">
-    <title>My shop Catalog</title>
+    <link rel="shortcut icon" href="/img/icons/logo.ico">
+    <title>My Video Shop</title>
 </head>
 
 <body class="d-flex h-100 text-center text-bg-dark">
     <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
-            <div>
-                <h3 class="float-md-start mb-0">My Video Market</h3>
-                <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">Home</a>
-                    <a class="nav-link fw-bold py-1 px-0 active" href="/catalog">Catalog</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="/contact">Contact</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="/login">Login</a>
-                </nav>
-            </div>
-        </header>
-        <main class="py-5">
-            <div class="container-fluid">
-                <!-- Carousel -->
-                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <svg class="bd-placeholder-img" width="100%" height="100%"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-
-                            <div class="container">
-                                <div class="carousel-caption text-start">
-                                    <h1>Example headline.</h1>
-                                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-
-                            <div class="container">
-                                <div class="carousel-caption">
-                                    <h1>Another example headline.</h1>
-                                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-
-                            <div class="container">
-                                <div class="carousel-caption text-end">
-                                    <h1>One more for good measure.</h1>
-                                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+        <!-- Header -->
+        <div th:replace="layout/header :: header">...</div>
+        <main>
+            <div class="container">
                 <!-- Galery -->
                 <div class="row">
                     <div class="col-sm-12 col-md-3 col-lg-2">
@@ -112,14 +36,13 @@
                             </ul>
                         </div>
                     </div>
-
                     <!-- Catalog List -->
-                    <div th:if="${error != null}" class="col-sm-12 col-md-9">
+                    <div th:if="${error != null}" class="col-sm-12 col-md-9 text-center">
                         <div th:text="${error}" class="alert alert-warning text-dark" role="alert" id="error">
                             Error
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-10 pt-5" th:if="${error == null}">
+                    <div class="col-sm-12 col-md-9 col-lg-10 pt-5 text-center" th:if="${error == null}">
                         <div th:if="${id == null}">
                             <p class="h2">Select one category</p>
                         </div>
@@ -166,12 +89,16 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </main>
+            <!-- Footer -->
+        </main>
+        <footer th:replace="layout/footer :: footer">...</footer>
     </div>
 
-    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
+<script src="/js/isLoged.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </html>

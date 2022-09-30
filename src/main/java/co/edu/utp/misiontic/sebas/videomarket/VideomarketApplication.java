@@ -4,11 +4,13 @@ import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
+// import org.springframework.stereotype.Component;
 import co.edu.utp.misiontic.sebas.videomarket.Model.entity.Category;
 import co.edu.utp.misiontic.sebas.videomarket.Model.entity.Movie;
+import co.edu.utp.misiontic.sebas.videomarket.Model.entity.User;
 import co.edu.utp.misiontic.sebas.videomarket.Model.repository.CategoryRepository;
 import co.edu.utp.misiontic.sebas.videomarket.Model.repository.MovieRepository;
+import co.edu.utp.misiontic.sebas.videomarket.Model.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,13 +25,14 @@ public class VideomarketApplication {
 	 * Command line runne = ejecuta un programa desde la linea de comandos: en este
 	 * caso para alamacenar datos jdbc
 	 */
-	@Component // los componentes indican a spring que ejecutar
+	// @Component // los componentes indican a spring que ejecutar
 	@Data
 	@AllArgsConstructor
 	public static class DataLoader implements CommandLineRunner {
 
 		private final CategoryRepository categoryRepository;
 		private final MovieRepository movieRepository;
+		private final UserRepository userRepository;
 
 		@Override
 		public void run(String... args) throws Exception {
@@ -37,6 +40,9 @@ public class VideomarketApplication {
 		}
 
 		private void loadData() {
+
+			// save credential admin user
+			userRepository.save(new User("admin", "123", "Sebastian", "admin@mail.com", true, true));
 
 			var scifi = categoryRepository.save(new Category("Sci-fi"));
 			var romance = categoryRepository.save(new Category("Romance"));
@@ -58,6 +64,7 @@ public class VideomarketApplication {
 					new Movie(004L, "One nigh in the museum", "Best of comedy animalistic", 120, "null", comedy));
 
 			movieRepository.saveAll(movies);
+
 		}
 
 	}

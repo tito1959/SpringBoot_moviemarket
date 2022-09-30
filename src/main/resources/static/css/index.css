@@ -45,3 +45,12 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+.nav-link {
+  padding: 4px;
+  padding-left: 8px;
+}
+
+#login {
+  padding-left: 8px;
+}

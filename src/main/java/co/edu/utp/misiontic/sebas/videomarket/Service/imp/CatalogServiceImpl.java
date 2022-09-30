@@ -1,5 +1,6 @@
 package co.edu.utp.misiontic.sebas.videomarket.Service.imp;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,8 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import co.edu.utp.misiontic.sebas.videomarket.Controller.dto.CategoryDto;
+import co.edu.utp.misiontic.sebas.videomarket.Controller.dto.ContactDto;
 import co.edu.utp.misiontic.sebas.videomarket.Controller.dto.MovieDto;
+import co.edu.utp.misiontic.sebas.videomarket.Model.entity.Contact;
 import co.edu.utp.misiontic.sebas.videomarket.Model.repository.CategoryRepository;
+import co.edu.utp.misiontic.sebas.videomarket.Model.repository.ContactRepository;
 import co.edu.utp.misiontic.sebas.videomarket.Model.repository.MovieRepository;
 import co.edu.utp.misiontic.sebas.videomarket.Service.CatalogService;
 import lombok.AllArgsConstructor;
@@ -19,12 +23,11 @@ public class CatalogServiceImpl implements CatalogService {
 
     private final CategoryRepository categoryRepository;
     private final MovieRepository movieRepository;
+    private final ContactRepository contactRepository;
 
     @Override
     public List<CategoryDto> getCategories() {
         var categories = categoryRepository.findAll(Sort.by("name"));
-        System.out.println("Resultado de catalogo impl: ");
-        System.out.println(categories);
 
         return categories.stream()
                 .map(data -> new CategoryDto(data.getName(), data.getId().intValue()))
@@ -56,6 +59,18 @@ public class CatalogServiceImpl implements CatalogService {
                         .build())
                 .collect(Collectors.toList());
         return categoryMovies;
+    }
+
+    @Override
+    public void saveContact(ContactDto contact) {
+        var entity = new Contact();
+        entity.setDate(new Date());
+        entity.setName(contact.getName());
+        entity.setEmail(contact.getEmail());
+        entity.setSubject(contact.getSubject());
+        entity.setMessage(contact.getMessage());
+
+        contactRepository.save(entity);
     }
 
 }

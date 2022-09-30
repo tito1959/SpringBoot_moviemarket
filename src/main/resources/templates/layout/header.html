@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="/img/icons/logo.ico">
+    <title>My Video Shop</title>
+</head>
+
+<body class="h-100">
+    <header class="mb-auto" th:fragment="header">
+        <h3 class="float-md-start mb-0">My Video Market</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">Home</a>
+            <a class="nav-link fw-bold py-1 px-0" href="/catalog">Catalog</a>
+            <a class="nav-link fw-bold py-1 px-0" href="/contact">Contact</a>
+            <!-- cart -->
+            <a class="nav-link fw-bold py-1 px-0" href="/cart">
+                Cart
+                <span class="badge rounded-pill bg-danger">
+                    <span id="cart-count">0</span>
+                    <span class="visually-hidden">unread message</span>
+                </span>
+            </a>
+            <!-- dropdown -->
+            <li class="nav-item dropdown fw-bold py-0 px-2" id="dropdown-log">
+                <span id="user" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    User
+                </span>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            <a class="nav-link fw-bold py-1 px-2" href="/login" id="login">Login</a>
+        </nav>
+    </header>
+</body>
+
+<script src="/js/isLoged.js"></script>
+
+</html>
